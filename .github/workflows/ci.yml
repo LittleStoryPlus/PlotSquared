@@ -16,5 +16,9 @@ jobs:
           java-version: 17
       - name: Clean Build
         run: ./gradlew clean build
-      - name: Find
-        run: find . -type f -name "*.jar"
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: |
+            **/build/libs/plotsquared-*.jar
