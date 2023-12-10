@@ -1,0 +1,20 @@
+name: Build
+on:
+  workflow_dispatch:
+jobs:
+  build_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Clean Build
+        run: ./gradlew clean build
+      - name: Find
+        run: find . -type f -name "*.jar"
